@@ -1,22 +1,19 @@
 import logo from './logo.svg';
 import './App.css';
+import Navbar from './components/Navbar';
+import Button from 'react-bootstrap/Button';
 
 function App() {
   return (
     <div className="App">
+
+      <Navbar/>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Muy buenas gente
+          APRETA EL BOTON
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <Button variant="info">Info</Button>{' '}
       </header>
     </div>
   );
