@@ -1,21 +1,17 @@
-import logo from './logo.svg';
 import './App.css';
-import Navbar from './components/Navbar';
-import Button from 'react-bootstrap/Button';
+import ItemListContainer from './components/ItemListContainer/ItemListContainer';
+import NavBar from './components/Navbar/NavBar';
 
 function App() {
   return (
-    <div className="App">
+    <>
 
-      <Navbar/>
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          APRETA EL BOTON
-        </p>
-        <Button variant="info">Info</Button>{' '}
-      </header>
-    </div>
+    <NavBar/>
+    <ItemListContainer greeting="Mensaje de prueba para tarea"/>
+    
+    
+    
+    </>
   );
 }
 
