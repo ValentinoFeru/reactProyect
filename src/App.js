@@ -9,8 +9,6 @@ function App() {
     <NavBar/>
     <ItemListContainer greeting="Mensaje de prueba para tarea"/>
     
-    
-    
     </>
   );
 }

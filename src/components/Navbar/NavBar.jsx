@@ -25,11 +25,11 @@ function NavBar() {
         <CartWidget/>
 
         <div className={`links ${clicked ? 'active' : ''}`}>
-          <a onClick={handleClick} href="#">Home</a>
-          <a onClick={handleClick} href="#">Bebidas</a>
-          <a onClick={handleClick} href="#">Sobre Nosotros</a>
-          <a onClick={handleClick} href="#">Contacto</a>
-          <a onClick={handleClick} href="#">Redes</a>
+          <a onClick={handleClick} href="/">Home</a>
+          <a onClick={handleClick} href="/">Bebidas</a>
+          <a onClick={handleClick} href="/">Sobre Nosotros</a>
+          <a onClick={handleClick} href="/">Contacto</a>
+          <a onClick={handleClick} href="/">Redes</a>
         </div>
         <div className='burger'>
           <BurgerButton clicked={clicked} handleClick={handleClick} />
@@ -50,6 +50,7 @@ function NavBar() {
 export default NavBar
 
 const NavContainer = styled.nav`
+
 
 .init {
   display: flex;
@@ -99,6 +100,7 @@ a{
   margin-right: auto;
   text-align: center;
   transition: all .5s ease;
+  
   a{
     color: #333;
     font-size: 2rem;
@@ -149,7 +151,6 @@ top: -1000px;
 left: -1000px;
 width: 100%;
 height: 100%;
-z-index: -1;
 transition: all .6s ease;
 &.active{
   border-radius: 0 0 80% 0;
@@ -157,7 +158,6 @@ transition: all .6s ease;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1;
 }
 
 `
