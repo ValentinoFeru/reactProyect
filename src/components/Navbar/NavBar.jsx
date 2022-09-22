@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import BurgerButton from './BurgerButton'
-import {FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faMartiniGlassCitrus} from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faMartiniGlassCitrus } from '@fortawesome/free-solid-svg-icons'
 import CartWidget from './CartWidget'
+import { NavLink } from 'react-router-dom';
 
 function NavBar() {
 
@@ -16,32 +17,37 @@ function NavBar() {
   return (
     <>
       <NavContainer>
-        <div className='init'>
-        <h2><span>Soft</span> Drinks</h2>
-        <FontAwesomeIcon className='carrito' icon={faMartiniGlassCitrus} />
-        </div>
-        
-        <div className="side">
-        <CartWidget/>
+        <div className='nav-container'>
 
-        <div className={`links ${clicked ? 'active' : ''}`}>
-          <a onClick={handleClick} href="/">Home</a>
-          <a onClick={handleClick} href="/">Bebidas</a>
-          <a onClick={handleClick} href="/">Sobre Nosotros</a>
-          <a onClick={handleClick} href="/">Contacto</a>
-          <a onClick={handleClick} href="/">Redes</a>
-        </div>
-        <div className='burger'>
-          <BurgerButton clicked={clicked} handleClick={handleClick} />
+          <div className='init'>
+            <h2><span>Soft</span> Drinks</h2>
+            <FontAwesomeIcon className='carrito' icon={faMartiniGlassCitrus} />
+          </div>
+
+          <div className="side">
+            <CartWidget />
+
+            <div className={`links ${clicked ? 'active' : ''}`}>
+              <NavLink to='/' >Home</NavLink>
+              <NavLink to='/categoria/whisky' >Whisky</NavLink>
+              <NavLink to='/categoria/vodka'>vodka</NavLink>
+              <NavLink to='/'>Contacto</NavLink>
+              <NavLink to='/'>Redes</NavLink>
+            </div>
+            <div className='burger'>
+              <BurgerButton clicked={clicked} handleClick={handleClick} />
+            </div>
+
+
+          </div>
+
         </div>
         <BgDiv className={`initial ${clicked ? 'active' : ''}`}></BgDiv>
 
 
-        </div>
-        
+
+
       </NavContainer>
-
-
 
     </>
   )
@@ -50,6 +56,16 @@ function NavBar() {
 export default NavBar
 
 const NavContainer = styled.nav`
+
+padding: .4rem;
+background-color: #333;
+
+
+.nav-container{
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
 
 
 .init {
@@ -73,11 +89,6 @@ const NavContainer = styled.nav`
 }
 }
 
-padding: .4rem;
-background-color: #333;
-display: flex;
-align-items: center;
-justify-content: space-between;
 
 a{
   color: #fff;
@@ -100,6 +111,7 @@ a{
   margin-right: auto;
   text-align: center;
   transition: all .5s ease;
+  
   
   a{
     color: #333;

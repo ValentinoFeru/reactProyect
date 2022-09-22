@@ -13,7 +13,7 @@ const increase = () => {
 }
 
 useEffect(() => {
-    setCount(parseFloat(initial));
+    setCount(parseInt(initial));
 
 }, [initial])
 
@@ -32,7 +32,7 @@ useEffect(() => {
     )
 }
 
-export default ItemCount
+export default ItemCount;
 
 const Count = styled.div`
 
