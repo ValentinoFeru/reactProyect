@@ -9,3 +9,16 @@
     width: 200px;
     margin-right: 1rem;
 }
+
+.boton-eliminar{
+    border-radius: 10px;
+    border: 1px solid;
+    padding: 9px;
+    margin: 10px;
+}
+
+.boton-eliminar:hover{
+    color: #fff;
+    background-color: brown;
+    transition: .2s;
+}

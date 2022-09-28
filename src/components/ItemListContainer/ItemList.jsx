@@ -19,7 +19,6 @@ const Greet = styled.div`
 .ganga{
     display: grid;
     grid-template-columns: repeat(1, 1fr);
-    margin: auto;
 }
 
 

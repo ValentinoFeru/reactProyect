@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import ItemList from './ItemList'
+import { getFirestore, collection, getDocs, query, where } from 'firebase/firestore';
 import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
+import Loader from '../loader/Loader';
 
 
-const bebidas = [
-    { id: 1, price: 58200, image: "http://d3ugyf2ht6aenh.cloudfront.net/stores/968/403/products/jw-blue1-558c78caaec75a813815899491518538-640-0.jpg", category: 'whisky', desc: 'Johnnie Walker Blue Label es una obra maestra sin igual: una exquisita combinación de los whiskies más raros y excepcionales de Escocia. Solo uno de cada diez mil barriles tiene la calidad, el carácter y el sabor escurridizos para ofrecer un sabor distintivo. Un whisky extraordinario para ocasiones extraordinarias.', title: "Blue Label" },
-    { id: 2, price: 11700, image: "https://whiskypedia.com.ar/wp-content/uploads/2019/11/JW-Red-Label-750ml.jpg", category: 'whisky', desc: 'Una ráfaga de etiqueta roja golpea el paladar con la frescura del agua de una ola al estrellarse, seguido por el sabor de las especias aromáticas y, finalmente, un largo y persistente, acabado humeante.', title: "Red Label" },
-    { id: 3, price: 1585, image: "https://d3ugyf2ht6aenh.cloudfront.net/stores/871/106/products/vodka-smirnoff1-11d292c21c224c9b9f16002812336502-1024-1024.png", desc: 'Smirnoff es un vodka de origen ruso, de 37,5% alc./vol., obtenido por triple destilación del alcohol de grano, y filtrado por carbón. Se trata de una variante con sabor, cuya pureza y neutralidad pretenden resaltar el sabor de la fruta, y que es comercializado como ideal para preparar exóticas mezclas.', category: 'vodka', title: "Smirnoff" },
-];
+
 
 const ItemListContainer = () => {
 
@@ -17,26 +15,37 @@ const ItemListContainer = () => {
     const { categoriaId } = useParams();
 
     useEffect(() => {
-        const getData = new Promise(resolve => {
-            setTimeout(() => {
-                resolve(bebidas);
-            }, 2000);
-        });
+        const querydb = getFirestore();
+        const queryCollection = collection(querydb, 'items');
         if (categoriaId) {
-            getData.then(res => setData(res.filter(whisky => whisky.category === categoriaId)));
+            const queryFilter = query(queryCollection, where('category', '==', categoriaId))
+            getDocs(queryFilter)
+                .then(res => setData(res.docs.map(product => ({ id: product.id, ...product.data() }))))
         } else {
-            getData.then(res => setData(res));
+            getDocs(queryCollection)
+                .then(res => setData(res.docs.map(product => ({ id: product.id, ...product.data() }))))
+
         }
 
     }, [categoriaId])
 
     return (
         <Mama>
-            <div className='gang'>
-                <ItemList data={data} />
-            </div>
+            {
+                data && data.length > 0 ?
+                    <div className='gang'>
+                        <ItemList data={data} />
+                    </div>
+                    :
+                    <div className='loader-container'>
+                        <Loader />
+                    </div>
+
+            }
+
+
         </Mama>
-        
+
 
     )
 }
@@ -49,6 +58,15 @@ const Mama = styled.div`
     display: flex;
     text-align: center;
     justify-content: center;
+}
+
+.loader-container{
+    height: 80vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
 }
 
 `
