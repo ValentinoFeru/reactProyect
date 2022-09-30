@@ -1,3 +1,4 @@
+import { addDoc, collection, getFirestore } from 'firebase/firestore';
 import React from 'react'
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
@@ -7,6 +8,29 @@ import ItemCart from '../ItemCart';
 
 const Cart = () => {
   const { cart, totalPrice, clearCart } = useCartContext();
+
+
+  const order = {
+    buyer:{
+      name: 'Valentino',
+      email: 'valentino@gmail.com',
+      phone: 1551344111,
+      address: 'maria de los salles 4045'
+    },
+    items: cart.map(product => ({ id: product.id, price:product.price, quantity: product.quantity })),
+    total: totalPrice(),
+  }
+
+  const handleClick = () => {
+    const db = getFirestore();
+    const ordersCollection = collection(db, 'orders');
+    addDoc(ordersCollection, order)
+    .then(({ id }) => console.log(id))
+
+
+
+
+  }
 
   if (cart.length === 0) {
     return (
@@ -41,6 +65,12 @@ const Cart = () => {
           <p>
             Total: <span>${totalPrice()}</span>
           </p>
+          
+          <button onClick={handleClick} className='comprar'>
+            Comprar
+          </button>
+          
+
 
           <button onClick={() => clearCart()} className="noselect"><span className="text">
             Vaciar</span><span className="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"></path></svg></span></button>
@@ -136,8 +166,26 @@ const Wewe = styled.div`
   }
 }
 
+.comprar{
+  margin-bottom: 13px;
+  padding: 12px;
+  padding-left: 44px;
+  padding-right: 44px;
+  background-color: #0dd60dc0;
+  border: .5px solid black;
+  border-radius: 9px;
+  :hover{
+    background-color: #19aa19;
+  }
+}
 
-button {
+
+
+
+
+
+
+.noselect {
   width: 150px;
   height: 50px;
   cursor: pointer;
@@ -150,17 +198,17 @@ button {
   background: #e62222;
 }
 
-button, button span {
+.noselect, .noselect span {
   transition: 200ms;
 }
 
-button .text {
+.noselect .text {
   transform: translateX(35px);
   color: white;
   font-weight: bold;
 }
 
-button .icon {
+.noselect .icon {
   position: absolute;
   border-left: 1px solid #c41b1b;
   transform: translateX(110px);
@@ -171,30 +219,30 @@ button .icon {
   justify-content: center;
 }
 
-button svg {
+.noselect svg {
   width: 15px;
   fill: #eee;
 }
 
-button:hover {
+.noselect:hover {
   background: #ff3636;
 }
 
-button:hover .text {
+.noselect:hover .text {
   color: transparent;
 }
 
-button:hover .icon {
+.noselect:hover .icon {
   width: 150px;
   border-left: none;
   transform: translateX(0);
 }
 
-button:focus {
+.noselect:focus {
   outline: none;
 }
 
-button:active .icon svg {
+.noselect:active .icon svg {
   transform: scale(0.8);
 }
 
