@@ -26,16 +26,12 @@ const Cart = () => {
     const ordersCollection = collection(db, 'orders');
     addDoc(ordersCollection, order)
     .then(({ id }) => console.log(id))
-
-
-
-
   }
 
   if (cart.length === 0) {
     return (
       <>
-        <Wewes>
+        <NoElements>
           <div className='container-principal-2'>
             <p>No hay elementos en el carrito :(</p>
             <Link to='/'>
@@ -48,7 +44,7 @@ const Cart = () => {
             </Link>
           </div>
 
-        </Wewes>
+        </NoElements>
 
       </>
     )
@@ -60,15 +56,17 @@ const Cart = () => {
       {
         cart.map(product => <ItemCart key={product.id} product={product} />)
       }
-      <Wewe>
+      <Order>
         <div className='container-principal'>
           <p>
             Total: <span>${totalPrice()}</span>
           </p>
           
+          <Link to="/terminar">
           <button onClick={handleClick} className='comprar'>
             Comprar
           </button>
+          </Link>
           
 
 
@@ -76,7 +74,7 @@ const Cart = () => {
             Vaciar</span><span className="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"></path></svg></span></button>
 
         </div>
-      </Wewe>
+      </Order>
 
     </>
   )
@@ -84,7 +82,7 @@ const Cart = () => {
 
 export default Cart
 
-const Wewes = styled.div`
+const NoElements = styled.div`
 
 .container-principal-2{
   height: 80vh;
@@ -151,7 +149,7 @@ const Wewes = styled.div`
 
 `
 
-const Wewe = styled.div`
+const Order = styled.div`
 
 .container-principal{
   display: flex;

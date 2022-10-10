@@ -30,7 +30,7 @@ const ItemListContainer = () => {
     }, [categoriaId])
 
     return (
-        <Mama>
+        <List>
             {
                 data && data.length > 0 ?
                 <div className='gang'>
@@ -44,7 +44,7 @@ const ItemListContainer = () => {
             }
 
 
-        </Mama>
+        </List>
 
 
     )
@@ -52,7 +52,7 @@ const ItemListContainer = () => {
 
 export default ItemListContainer
 
-const Mama = styled.div`
+const List = styled.div`
 
 .gang{
     display: flex;

@@ -20,18 +20,18 @@ const ItemDetailContainer = () => {
   }, [detalleId])
 
   return (
-    <Wawa>
+    <Dcontainer>
 <div className='main-container'>
   <ItemDetail data={data} />
 </div>
-    </Wawa>
+    </Dcontainer>
     
   )
 }
 
 export default ItemDetailContainer
 
-const Wawa = styled.div`
+const Dcontainer = styled.div`
 
 .main-container{
   height: 90vh;
