@@ -4,36 +4,53 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { useCartContext } from '../../context/CartContext';
 import { screen } from '../../constants/screen';
+import Loader from '../loader/Loader';
 
 const ItemDetail = ({ data }) => {
 
     const [goToCart, setGoToCart] = useState(false);
     const { addProduct } = useCartContext();
+    const [loading, setLoading] = useState(true);
 
     const onAdd = (quantity) => {
         setGoToCart(true);
         addProduct(data, quantity);
     }
 
+
+
     return (
         <Detailed>
             <div className='container'>
-                <div className='card'>
-                    <div className='card__content'>
-                        <img className='datail__image' src={data.image} alt="" />
-                        <h1>{data.title}</h1>
-                        <p><i>{data.desc}</i></p>
+                <div className={ loading ? '' : 'card'}>
+                    <div className={ loading ? '' : 'card__content'}>
+                        <img onLoad={() => setLoading(false)} className='datail__image' src={data.image} alt="" />
                         {
-                            goToCart
-                                ? <Link className='terminar' to='/cart'>
-                                    <button className="cssbuttons-io-button"> Terminar compra
-                                        <div className="icon">
-                                            <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"></path><path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path></svg>
-                                        </div>
-                                    </button>
-                                </Link>
-                                : <ItemCount initial={1} stock={5} onAdd={onAdd} />
+                            loading ?
+
+                                <Loader />
+
+                                :
+
+                                <div>
+                                    <h1>{data.title}</h1>
+                                    <p><i>{data.desc}</i></p>
+                                    {
+                                        goToCart
+                                            ? <Link className='terminar' to='/cart'>
+                                                <button className="cssbuttons-io-button"> Terminar compra
+                                                    <div className="icon">
+                                                        <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h24v24H0z" fill="none"></path><path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z" fill="currentColor"></path></svg>
+                                                    </div>
+                                                </button>
+                                            </Link>
+                                            : <ItemCount initial={1} stock={5} onAdd={onAdd} />
+                                    }
+
+                                </div>
+
                         }
+
                     </div>
                 </div>
             </div>

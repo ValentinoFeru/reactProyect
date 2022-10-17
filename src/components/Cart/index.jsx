@@ -1,6 +1,6 @@
 import { addDoc, collection, getFirestore } from 'firebase/firestore';
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useCartContext } from '../../context/CartContext';
 import ItemCart from '../ItemCart';
@@ -8,6 +8,9 @@ import ItemCart from '../ItemCart';
 
 const Cart = () => {
   const { cart, totalPrice, clearCart } = useCartContext();
+
+  const navigate = useNavigate();
+  
 
 
   const order = {
@@ -25,7 +28,7 @@ const Cart = () => {
     const db = getFirestore();
     const ordersCollection = collection(db, 'orders');
     addDoc(ordersCollection, order)
-    .then(({ id }) => console.log(id))
+    .then(({ id }) => navigate('/terminar/' + id))
   }
 
   if (cart.length === 0) {
@@ -62,11 +65,11 @@ const Cart = () => {
             Total: <span>${totalPrice()}</span>
           </p>
           
-          <Link to="/terminar">
+        
           <button onClick={handleClick} className='comprar'>
             Comprar
           </button>
-          </Link>
+          
           
 
 

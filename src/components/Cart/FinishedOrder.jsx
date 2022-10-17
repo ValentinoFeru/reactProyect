@@ -1,19 +1,38 @@
 import React from 'react'
+import { useParams } from 'react-router-dom';
+import { useCartContext } from '../../context/CartContext';
 import styled from 'styled-components';
 
 
 const FinishedOrder = () => {
 
+    const params = useParams();
+    console.log(params)
+    const { cart, totalPrice } = useCartContext();
 
 
     return (
 
         <MyOrder>
-            <div className='congrats'>
+            <div className='order-content'>
 
-                <p>Felicidades !, <span> tu compra esta siendo procesada</span></p>
 
-                <div className="loader"></div>
+                <p className='felicidades'>Felicidades !, <span> tu compra ha sido completada con exito</span></p>
+
+                {
+                    cart.map(product =>
+                        <div className='orden-finalizada'>
+                            <h1>{product.title}</h1>
+                            <p>Precio c/u: {product.price}</p>
+                            <p>Cantidad: {product.quantity}</p>
+                        </div>)
+                }
+                <div className='total'>
+                <p>Total: <span>${totalPrice()}</span></p>
+                </div>
+
+
+
 
             </div>
 
@@ -26,23 +45,49 @@ export default FinishedOrder;
 
 const MyOrder = styled.div`
 
-.congrats{
-    height: 60vh;
+.order-content{
+
+    height: 100vh;
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-    p{
-        color: #02ca02;
+    align-items: center;
+
+    .felicidades{
+        font-size: 75px;
+        color: #03b803;
         font-weight: bold;
-        font-size: 60px;
-
+        span{
+            font-size: 50px;
+            color: #355335f4;
+        }
+    }
+    
+    
+    .orden-finalizada{  
+        width: 800px;
+        border: 1px dashed black;
+        padding: 30px;
+        p{
+            font-size: 20px;
+        }
     }
 
-    span{
-        color: #000000d2;
-        font-size: 50px;
+    .total{
+        width: 800px;
+        border: 1px dashed black;
+        padding: 20px;
+        font-size: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        span{
+            color: #178117;
+        }
     }
+
+}
 
 .loader {
     margin-top: 60px;
@@ -97,6 +142,6 @@ const MyOrder = styled.div`
     transform: rotate(360deg);
 }
 }
-}
+
 
 `
