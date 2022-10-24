@@ -33,7 +33,7 @@ const ItemListContainer = () => {
         <List>
             {
                 data && data.length > 0 ?
-                    <div className='gang'>
+                    <div className='item-container'>
                         <ItemList data={data} />
                     </div>
                     :
@@ -54,7 +54,7 @@ export default ItemListContainer
 
 const List = styled.div`
 
-.gang{
+.item-container{
     display: flex;
     text-align: center;
     justify-content: center;

@@ -1,6 +1,5 @@
-import { addDoc, collection, getFirestore } from 'firebase/firestore';
 import React from 'react'
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';  
 import styled from 'styled-components';
 import { useCartContext } from '../../context/CartContext';
 import ItemCart from '../ItemCart';
@@ -8,28 +7,6 @@ import ItemCart from '../ItemCart';
 
 const Cart = () => {
   const { cart, totalPrice, clearCart } = useCartContext();
-
-  const navigate = useNavigate();
-  
-
-
-  const order = {
-    buyer:{
-      name: 'Valentino',
-      email: 'valentino@gmail.com',
-      phone: 1551344111,
-      address: 'maria de los salles 4045'
-    },
-    items: cart.map(product => ({ id: product.id, price:product.price, quantity: product.quantity })),
-    total: totalPrice(),
-  }
-
-  const handleClick = () => {
-    const db = getFirestore();
-    const ordersCollection = collection(db, 'orders');
-    addDoc(ordersCollection, order)
-    .then(({ id }) => navigate('/terminar/' + id))
-  }
 
   if (cart.length === 0) {
     return (
@@ -65,10 +42,11 @@ const Cart = () => {
             Total: <span>${totalPrice()}</span>
           </p>
           
-        
-          <button onClick={handleClick} className='comprar'>
+        <Link to='/login'>
+          <button className='comprar'>
             Comprar
           </button>
+        </Link>
           
           
 
@@ -96,10 +74,10 @@ const NoElements = styled.div`
   p{
     font-size: 30px;
     margin-bottom: 23px;
+    color: #dddbdb;
   }
 }
 
-/* From uiverse.io by @alexmaracinaru */
 .cta {
   border: none;
   background: none;
@@ -128,7 +106,7 @@ const NoElements = styled.div`
 
 .hover-underline-animation {
   position: relative;
-  color: black;
+  color: #dddbdb;
   padding-bottom: 20px;
 }
 
@@ -140,7 +118,7 @@ const NoElements = styled.div`
   height: 2px;
   bottom: 0;
   left: 0;
-  background-color: #000000;
+  background-color: #dddbdb;
   transform-origin: bottom right;
   transition: transform 0.25s ease-out;
 }
@@ -161,6 +139,7 @@ const Order = styled.div`
   align-items: center;
   p{
     font-weight: bold;
+    color: #dddbdb;
     span{
       color: #19aa19;
     }
@@ -181,11 +160,6 @@ const Order = styled.div`
 }
 
 
-
-
-
-
-
 .noselect {
   width: 150px;
   height: 50px;
@@ -195,7 +169,6 @@ const Order = styled.div`
   background: red;
   border: none;
   border-radius: 5px;
-  box-shadow: 1px 1px 3px rgba(0,0,0,0.15);
   background: #e62222;
 }
 

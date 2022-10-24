@@ -39,7 +39,7 @@ const Cartas = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #fff;
+    background: #f4f0f0;
     padding: 0.5em;
     padding-bottom: 3.4em;
 

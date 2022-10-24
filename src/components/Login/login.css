@@ -1,0 +1,40 @@
+.login-container{
+    background-color: rgb(206, 206, 206);
+    width: 400px;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    border-radius: 20px;
+}
+
+.login-container form {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    width: 70%;
+
+}
+
+.boton-enviar{
+    margin-top: 40px;
+    padding: 10px;
+    background-color: rgb(45, 194, 45);
+    
+}
+.login-container form label{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    margin-top: 13px;
+    
+}
+
+.login-container form label input{
+    border-radius: 8px;
+    padding: 7px;
+    margin-top: 13px;
+}

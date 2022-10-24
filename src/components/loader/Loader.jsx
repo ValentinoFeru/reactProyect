@@ -127,7 +127,7 @@ const Load = styled.div`
  height: 28px;
  margin: 2px;
  border-radius: 0px;
- background: #1a1a1a;
+ background: #dbd8d8;
  background-size: cover;
  background-position: center;
  background-attachment: fixed;

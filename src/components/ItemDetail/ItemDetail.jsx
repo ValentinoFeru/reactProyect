@@ -84,7 +84,7 @@ const Detailed = styled.div`
 }
 
 .card__content {
-    background: #fff;
+    background: #ffffff;
     border-radius: 17px;
     width: 100%;
     height: 100%;
